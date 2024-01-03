@@ -52,7 +52,6 @@ jobs:
           command: 'npm i'
       
       - cypress/run-tests:
-          name: Unit tests 
           cypress-command: 'npx cypress run --component'
 
       - run:
@@ -65,7 +64,6 @@ jobs:
           command: sleep 10
 
       - cypress/run-tests:
-          name: E2E tests 
           cypress-command: 'npx cypress run'
   
   push_frontend_to_production:
