@@ -10,9 +10,9 @@ jobs:
           name: Adding git
           command: apk add git
       - persist_to_workspace:
-          root: /usr/bin
+          root: /
           paths:
-            - git
+            - usr/
 
 
   changes_in_frontend:
@@ -20,7 +20,7 @@ jobs:
       - image: docker:20.10.11
     steps:
       - attach_workspace:
-          at: /workspace/
+          at: /
       - checkout
 
       - run:
@@ -40,7 +40,7 @@ jobs:
       - checkout
 
       - cypress/install
-      
+
       - run:
           name: install deps
           command: 'npm i'
@@ -65,7 +65,7 @@ jobs:
       - image: node:latest
     steps:
       - attach_workspace:
-          at: /git
+          at: /
       - checkout
       
       - run:
