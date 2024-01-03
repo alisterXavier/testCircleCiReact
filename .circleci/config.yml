@@ -78,7 +78,6 @@ workflows:
   the_great_gatsby:
     jobs:
       - install_git
-      - install-and-persist
       - changes_in_frontend:
           requires:
             - install_git
@@ -88,7 +87,6 @@ workflows:
               only:
                 - master2.0-dev
           requires:
-            - install-and-persist
             - changes_in_frontend
       - push_frontend_to_production:
           requires:
