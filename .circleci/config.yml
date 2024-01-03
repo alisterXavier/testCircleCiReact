@@ -1,7 +1,5 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@3.2.1
-  
+
 jobs:
   install_git:
     docker:
@@ -73,6 +71,8 @@ jobs:
           name: Push to main2.0 - Production branch
           command: git push origin master2.0-dev:master
 
+orbs:
+  cypress: cypress-io/cypress@3.2.1
 workflows:
   the_great_gatsby:
     jobs:
@@ -100,11 +100,3 @@ workflows:
             branches:
               only:
                 - master2.0-dev
-      # - publish_server_to_dockerhub:
-          # requires:
-          #   - changes_in_server
-          #   - push_frontend_to_production
-          # filters:
-          #   branches:
-          #     only:
-                # - master
