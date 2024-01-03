@@ -38,14 +38,15 @@ jobs:
     steps:
       - checkout
 
+      - cypress/install
+
       - run:
           name: install deps
           command: 'npm i'
 
-      - cypress/install
-
       - cypress/run-tests:
           cypress-command: 'npx cypress run --component'
+
       - run:
           name: Run app
           command: 'npm start'
