@@ -10,9 +10,9 @@ jobs:
           name: Adding git
           command: apk add git
       - persist_to_workspace:
-          root: /git
+          root: /usr/bin
           paths:
-            - usr/
+            - git
 
   install_deps:
     docker:
@@ -23,7 +23,7 @@ jobs:
           name: install deps
           command: 'npm i'
       - persist_to_workspace:
-          root: /deps
+          root: /usr/src/app
           paths:
             - node_modules
 
@@ -32,7 +32,7 @@ jobs:
       - image: docker:20.10.11
     steps:
       - attach_workspace:
-          at: /git
+          at: /workspace/bin/git
       - checkout
 
       - run:
