@@ -85,15 +85,7 @@ workflows:
     jobs:
       - install_git
       - changes_in_frontend
-      - run_frontend_unit_test:
-          filters:
-            branches:
-              only:
-                - master2.0-dev
-          requires:
-            - install_deps
-            - changes_in_frontend
-      - run_frontend_e2e_test:
+      - run_frontend_test:
           filters:
             branches:
               only:
@@ -104,8 +96,7 @@ workflows:
       - push_frontend_to_production:
           requires:
             - changes_in_frontend
-            - run_frontend_unit_test
-            - run_frontend_e2e_test
+            - run_frontend_test
           filters:
             branches:
               only:
