@@ -21,8 +21,7 @@ jobs:
       - checkout
       - run:
           name: install deps
-          command: |
-            pnpm i
+          command: 'pnpm i'
       - persist_to_workspace:
           root: /deps
           paths:
@@ -37,8 +36,8 @@ jobs:
       - checkout
 
       - cypress/run:
-          install-browsers: true 
           cypress-command: 'npx cypress run --component'
+          install-browsers: true 
 
   run_frontend_e2e_test:
     docker:
