@@ -45,8 +45,7 @@ jobs:
           name: install deps
           command: 'npm i'
 
-      - cypress/run-tests:
-          cypress-command: 'npx cypress run --component'
+      - cypress/run
 
       - run:
           name: Run app
