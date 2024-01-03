@@ -48,16 +48,15 @@ jobs:
 
       - run:
           name: Run app
-          command: |
-            pnpm dev:client
+          command: 'npm run dev'
           background: true
             
       - run:
           name: Wait for app
           command: sleep 10
 
-      - cypress/run: 
-          command: 'npx cypress run --component'
+      - cypress/run-tests: 
+          cypress-command: 'npx cypress run --component'
   
   push_frontend_to_production:
     docker:
