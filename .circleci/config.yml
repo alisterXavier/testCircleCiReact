@@ -89,7 +89,6 @@ workflows:
               only:
                 - master2.0-dev
           requires:
-            - install_deps
             - changes_in_frontend
       - push_frontend_to_production:
           requires:
