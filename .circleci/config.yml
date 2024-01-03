@@ -38,13 +38,12 @@ jobs:
       - image: node:latest
     steps:
       - checkout
-
-      - cypress/install
-
+      
       - run:
           name: install deps
           command: 'npm i'
 
+      - cypress/install
       - cypress/run
 
       - run:
