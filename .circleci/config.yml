@@ -34,7 +34,7 @@ jobs:
 
   run_frontend_test:
     docker:
-      - image: node:latest
+      - image: node:14.15.4
     steps:
       - checkout
 
