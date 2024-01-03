@@ -50,24 +50,12 @@ jobs:
       - image: node:latest
     steps:
       - attach_workspace:
-          at: /workspace/
+          at: /workspace/node_modules
       - checkout
 
       - run:
           name: 'dir'
           command: 'pwd'
-
-      - run:
-          name: 'ls'
-          command: 'ls /'
-
-      - run:
-          name: 'ls workspace'
-          command: 'ls /workspace'
-
-      # - run:
-      #     name: 'ls workspace/deps'
-      #     command: 'ls /workspace/'
 
       # - cypress/run-tests:
       #     cypress-command: 'npx cypress run --component'
@@ -77,7 +65,7 @@ jobs:
       - image: node:latest
     steps:
       - attach_workspace:
-          at: /deps
+          at: /workspace/node_modules
       - checkout
 
       - run:
