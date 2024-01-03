@@ -53,12 +53,8 @@ jobs:
           at: /workspace/node_modules
       - checkout
 
-      - run:
-          name: 'dir'
-          command: 'pwd'
-
-      # - cypress/run-tests:
-      #     cypress-command: 'npx cypress run --component'
+      - cypress/run-tests:
+          cypress-command: 'npx cypress run --component'
 
   run_frontend_e2e_test:
     docker:
