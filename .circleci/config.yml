@@ -84,7 +84,6 @@ workflows:
   the_great_gatsby:
     jobs:
       - install_git
-      - install_deps
       - changes_in_frontend
       - run_frontend_unit_test:
           filters:
