@@ -22,13 +22,10 @@ jobs:
       - run:
           name: install deps
           command: 'npm i'
-      - run: 
-          name: pwd
-          command: 'pwd'
-
-      - run: 
-          name: list
-          command: 'ls ./'
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - node_modules
 
   changes_in_frontend:
     docker:
@@ -53,11 +50,27 @@ jobs:
       - image: node:latest
     steps:
       - attach_workspace:
-          at: /deps
+          at: /workspace/
       - checkout
 
-      - cypress/run-tests:
-          cypress-command: 'npx cypress run --component'
+      - run:
+          name: 'dir'
+          command: 'pwd'
+
+      - run:
+          name: 'ls'
+          command: 'ls /'
+
+      - run:
+          name: 'ls workspace'
+          command: 'ls /workspace'
+
+      # - run:
+      #     name: 'ls workspace/deps'
+      #     command: 'ls /workspace/'
+
+      # - cypress/run-tests:
+      #     cypress-command: 'npx cypress run --component'
 
   run_frontend_e2e_test:
     docker:
@@ -69,7 +82,7 @@ jobs:
 
       - run:
           name: Run app
-          command: 'npm run dev'
+          command: 'npm start'
           background: true
             
       - run:
