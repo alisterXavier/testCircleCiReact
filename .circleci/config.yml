@@ -1,0 +1,110 @@
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@3.2.1
+  
+jobs:
+  install_git:
+    docker:
+      - image: node:latest
+    steps:
+      - run:
+          name: Adding git
+          command: apk add git
+      - persist_to_workspace:
+          root: /git
+          paths:
+            - usr/
+
+  install_deps:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - run:
+          name: install deps
+          command: |
+            pnpm i
+      - persist_to_workspace:
+          root: /deps
+          paths:
+            - node_modules
+
+  run_frontend_unit_test:
+    docker:
+      - image: node:latest
+    steps:
+      - attach_workspace:
+          at: /deps
+      - checkout
+
+      - cypress/run: 
+          command: 'npx cypress run --component'
+
+  run_frontend_e2e_test:
+    docker:
+      - image: node:latest
+    steps:
+      - attach_workspace:
+          at: /deps
+      - checkout
+
+      - run:
+          name: Run app
+          command: |
+            pnpm dev:client
+          background: true
+            
+      - run:
+          name: Wait for app
+          command: sleep 10
+
+      - cypress/run: 
+          command: 'npx cypress run --component'
+
+  push_frontend_to_production:
+    docker:
+      - image: node:latest
+    steps:
+      - attach_workspace:
+          at: /git
+      - checkout
+      
+      - run:
+          name: Push to main2.0 - Production branch
+          command: git push origin master2.0-dev:master
+
+workflows:
+  the_great_gatsby:
+    jobs:
+      - install_git
+      - run_frontend_unit_test:
+          filters:
+            branches:
+              only:
+                - master2.0-dev
+          requires:
+            - install_deps
+      - run_frontend_e2e_test:
+          filters:
+            branches:
+              only:
+                - master2.0-dev
+          requires:
+            - install_deps
+      - push_frontend_to_production:
+          requires:
+            - changes_in_frontend
+            - run_frontend_unit_test
+            - run_frontend_e2e_test
+          filters:
+            branches:
+              only:
+                - master2.0-dev
+      # - publish_server_to_dockerhub:
+          # requires:
+          #   - changes_in_server
+          #   - push_frontend_to_production
+          # filters:
+          #   branches:
+          #     only:
+                # - master
