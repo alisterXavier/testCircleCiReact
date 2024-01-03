@@ -38,8 +38,6 @@ jobs:
     steps:
       - checkout
 
-      - cypress/install
-
       - run:
           name: install deps
           command: 'npm i'
