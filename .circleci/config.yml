@@ -46,7 +46,9 @@ jobs:
       - image: node:latest
     steps:
       - checkout
-      
+      - attach_workspace:
+          at: ~/
+          
       - run:
           name: install deps
           command: 'npm i'
