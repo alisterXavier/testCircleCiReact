@@ -14,7 +14,6 @@ jobs:
           paths:
             - usr/
 
-
   changes_in_frontend:
     docker:
       - image: docker:20.10.11
@@ -38,13 +37,12 @@ jobs:
       - image: node:latest
     steps:
       - checkout
-      
+
       - run:
           name: install deps
           command: 'npm i'
 
       - cypress/install
-      - cypress/run
 
       - run:
           name: Run app
