@@ -14,18 +14,14 @@ jobs:
           paths:
             - git
 
-  install_deps:
-    docker:
-      - image: node:latest
-    steps:
-      - checkout
-      - run:
-          name: install deps
-          command: 'npm i'
-      - persist_to_workspace:
-          root: /root/project
-          paths:
-            - node_modules
+  # install-and-persist:
+  #   executor: cypress/default
+  #   steps:
+  #     - cypress/install
+  #     - persist_to_workspace:
+  #         paths:
+  #           - .cache/Cypress
+  #         root: ~/
 
   changes_in_frontend:
     docker:
@@ -45,24 +41,19 @@ jobs:
               echo "Changes detected continuing with build";
             fi
 
-  run_frontend_unit_test:
+  run_frontend_test:
     docker:
       - image: node:latest
     steps:
-      - attach_workspace:
-          at: /workspace/node_modules
       - checkout
-
+      
+      - run:
+          name: install deps
+          command: 'npm i'
+      
       - cypress/run-tests:
+          name: Unit tests 
           cypress-command: 'npx cypress run --component'
-
-  run_frontend_e2e_test:
-    docker:
-      - image: node:latest
-    steps:
-      - attach_workspace:
-          at: /workspace/node_modules
-      - checkout
 
       - run:
           name: Run app
@@ -73,8 +64,9 @@ jobs:
           name: Wait for app
           command: sleep 10
 
-      - cypress/run-tests: 
-          cypress-command: 'npx cypress run --component'
+      - cypress/run-tests:
+          name: E2E tests 
+          cypress-command: 'npx cypress run'
   
   push_frontend_to_production:
     docker:
