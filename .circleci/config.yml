@@ -14,14 +14,14 @@ jobs:
           paths:
             - git
 
-  # install-and-persist:
-  #   executor: cypress/default
-  #   steps:
-  #     - cypress/install
-  #     - persist_to_workspace:
-  #         paths:
-  #           - .cache/Cypress
-  #         root: ~/
+  install-and-persist:
+    executor: cypress/default
+    steps:
+      - cypress/install
+      - persist_to_workspace:
+          paths:
+            - .cache/Cypress
+          root: ~/
 
   changes_in_frontend:
     docker:
@@ -82,13 +82,17 @@ workflows:
   the_great_gatsby:
     jobs:
       - install_git
-      - changes_in_frontend
+      - install-and-persist
+      - changes_in_frontend:
+          requires:
+            - install_git
       - run_frontend_test:
           filters:
             branches:
               only:
                 - master2.0-dev
           requires:
+            - install-and-persist
             - changes_in_frontend
       - push_frontend_to_production:
           requires:
