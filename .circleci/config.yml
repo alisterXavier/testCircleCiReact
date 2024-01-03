@@ -1,5 +1,6 @@
 version: 2.1
-
+orbs:
+  cypress: cypress-io/cypress@3.2.1
 jobs:
   install_git:
     docker:
@@ -35,8 +36,9 @@ jobs:
           at: /deps
       - checkout
 
-      - cypress/run: 
-          command: 'npx cypress run --component'
+      - cypress/run:
+          install-browsers: true 
+          cypress-command: 'npx cypress run --component'
 
   run_frontend_e2e_test:
     docker:
@@ -58,7 +60,7 @@ jobs:
 
       - cypress/run: 
           command: 'npx cypress run --component'
-
+  
   push_frontend_to_production:
     docker:
       - image: node:latest
@@ -71,8 +73,6 @@ jobs:
           name: Push to main2.0 - Production branch
           command: git push origin master2.0-dev:master
 
-orbs:
-  cypress: cypress-io/cypress@3.2.1
 workflows:
   the_great_gatsby:
     jobs:
