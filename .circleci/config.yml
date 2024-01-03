@@ -22,10 +22,13 @@ jobs:
       - run:
           name: install deps
           command: 'npm i'
-      - persist_to_workspace:
-          root: /usr/src/app
-          paths:
-            - node_modules
+      - run: 
+          name: pwd
+          command: 'pwd'
+
+      - run: 
+          name: list
+          command: 'ls ./'
 
   changes_in_frontend:
     docker:
