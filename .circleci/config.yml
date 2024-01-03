@@ -27,6 +27,24 @@ jobs:
           paths:
             - node_modules
 
+  changes_in_frontend:
+    docker:
+      - image: docker:20.10.11
+    steps:
+      - attach_workspace:
+          at: /git
+      - checkout
+
+      - run:
+          name: Check for changes in folder
+          command: |
+            if git diff --quiet HEAD^..HEAD ./app; then 
+              echo "No changes in specified folder."
+              circleci-agent step halt
+            else 
+              echo "Changes detected continuing with build";
+            fi
+
   run_frontend_unit_test:
     docker:
       - image: node:latest
