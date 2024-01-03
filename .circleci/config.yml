@@ -20,7 +20,7 @@ jobs:
       - image: docker:20.10.11
     steps:
       - attach_workspace:
-          at: /workspace/bin/git
+          at: /workspace/
       - checkout
 
       - run:
@@ -39,18 +39,11 @@ jobs:
     steps:
       - checkout
 
+      - cypress/install
+      
       - run:
           name: install deps
           command: 'npm i'
-      
-      - run:
-          name: install deps
-          command: 'apt-get update'
-
-      
-      - run:
-          name: install deps
-          command: 'apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb'
 
       - cypress/run-tests:
           cypress-command: 'npx cypress run --component'
