@@ -17,7 +17,9 @@ jobs:
       - image: cimg/base:2024.01
     steps:
       - checkout
-
+      - add_ssh_keys:
+          fingerprints:
+            - "7e:81:79:84:bc:03:cb:d8:b5:33:21:0d:46:1e:f3:22"
       - run:
           name: Push
           command: git push origin master2.0-dev:master
