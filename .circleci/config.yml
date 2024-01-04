@@ -10,5 +10,5 @@ workflows:
           mapping: |
             app/.* run_frontend_tests true
             server/.* run_backend_deploy true
-          base-revision: master2.0
+          base-revision: master
           config-path: .circleci/continue_config.yml
