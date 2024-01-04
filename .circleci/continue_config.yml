@@ -27,7 +27,7 @@ jobs:
 
 workflows:
   the_great_depression:
-    when: ${<< pipeline.parameters.run_frontend_tests >>}
+    when: << pipeline.parameters.run_frontend_tests >>
     jobs:
       - frontend_tests:
           filters:
