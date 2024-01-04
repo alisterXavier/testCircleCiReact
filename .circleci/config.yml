@@ -1,6 +1,15 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@3.2.1
+
+parameters:
+  run_frontend_tests:
+    type: boolean
+    default: false
+  run_changes_in_backend:
+    type: boolean
+    default: false
+
 jobs:
   install_git:
     docker:
@@ -31,6 +40,8 @@ jobs:
             else 
               echo "Changes detected continuing with build";
             fi
+      - run:
+          command: echo " << pipeline.parameters.run_frontend_tests >>"
 
   run_frontend_test:
     docker:
@@ -65,17 +76,17 @@ jobs:
       - cypress/run-tests:
           cypress-command: 'npx cypress run'
   
-  push_frontend_to_production:
-    docker:
-      - image: node:latest
-    steps:
-      - attach_workspace:
-          at: /
-      - checkout
+  # push_frontend_to_production:
+  #   docker:
+  #     - image: node:latest
+  #   steps:
+  #     - attach_workspace:
+  #         at: /
+  #     - checkout
       
-      - run:
-          name: Push to main2.0 - Production branch
-          command: git push origin master2.0-dev:master
+  #     - run:
+  #         name: Push to main2.0 - Production branch
+  #         command: git push origin master2.0-dev:master
 
 workflows:
   the_great_gatsby:
@@ -89,13 +100,14 @@ workflows:
             branches:
               only:
                 - master2.0-dev
+          when: << pipeline.parameters.run_frontend_tests >>
           requires:
             - changes_in_frontend
-      - push_frontend_to_production:
-          requires:
-            - changes_in_frontend
-            - run_frontend_test
-          filters:
-            branches:
-              only:
-                - master2.0-dev
+      # - push_frontend_to_production:
+          # requires:
+          #   - changes_in_frontend
+          #   - run_frontend_test
+          # filters:
+          #   branches:
+          #     only:
+          #       - master2.0-dev
