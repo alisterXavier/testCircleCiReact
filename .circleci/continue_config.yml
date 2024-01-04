@@ -14,7 +14,7 @@ parameters:
 jobs:
   frontend_tests:
     docker:
-      - image: cimg:latest
+      - image: cimg/base:2024.01
     steps:
       - checkout
 
