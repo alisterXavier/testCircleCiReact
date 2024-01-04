@@ -26,7 +26,6 @@ jobs:
   changes_in_frontend:
     docker:
       - image: docker:20.10.11
-    when: << pipeline.parameters.run_frontend_tests >>
     steps:
       - attach_workspace:
           at: /
@@ -97,17 +96,10 @@ workflows:
           requires:
             - install_git
       - run_frontend_test:
+          when: << pipeline.parameters.run_frontend_tests >>
           filters:
             branches:
               only:
                 - master2.0-dev
           requires:
             - changes_in_frontend
-      # - push_frontend_to_production:
-          # requires:
-          #   - changes_in_frontend
-          #   - run_frontend_test
-          # filters:
-          #   branches:
-          #     only:
-          #       - master2.0-dev
