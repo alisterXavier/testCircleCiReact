@@ -51,31 +51,31 @@ jobs:
 
       - run:
           name: install deps
-          command: 'npm i'
+          command: "npm i"
 
       - run:
           name: update apt
           command: apt-get update
-         
+
       - run:
           name: install system deps
           command: apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-          
+
       - cypress/run-tests:
-          cypress-command: 'npx cypress run --component'
+          cypress-command: "npx cypress run --component"
 
       - run:
           name: Run app
-          command: 'npm start'
+          command: "npm start"
           background: true
-            
+
       - run:
           name: Wait for app
           command: sleep 10
 
       - cypress/run-tests:
-          cypress-command: 'npx cypress run'
-  
+          cypress-command: "npx cypress run"
+
   # push_frontend_to_production:
   #   docker:
   #     - image: node:latest
@@ -83,7 +83,7 @@ jobs:
   #     - attach_workspace:
   #         at: /
   #     - checkout
-      
+
   #     - run:
   #         name: Push to main2.0 - Production branch
   #         command: git push origin master2.0-dev:master
@@ -95,8 +95,11 @@ workflows:
       - changes_in_frontend:
           requires:
             - install_git
+
+  the_great_depression:
+    when: << pipeline.parameters.run_frontend_tests >>
+    jobs:
       - run_frontend_test:
-          when: << pipeline.parameters.run_frontend_tests >>
           filters:
             branches:
               only:
