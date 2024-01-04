@@ -54,5 +54,3 @@ workflows:
             branches:
               only:
                 - master2.0-dev
-          requires:
-            - changes_in_frontend
