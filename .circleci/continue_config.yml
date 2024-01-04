@@ -12,7 +12,7 @@ parameters:
     default: false
 
 jobs:
-  frontend_test:
+  frontend_tests:
     docker:
       - image: node:latest
     steps:
