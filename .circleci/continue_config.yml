@@ -1,0 +1,58 @@
+versio: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@3.2.1
+
+parameters:
+  run_frontend_tests:
+    type: boolean
+    default: false
+  run_backend_deploy:
+    type: boolean
+    default: false
+
+jobs:
+  frontend_test:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+
+      - run:
+          name: install deps
+          command: "npm i"
+
+      - run:
+          name: update apt
+          command: apt-get update
+
+      - run:
+          name: install system deps
+          command: apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+      - cypress/run-tests:
+          cypress-command: "npx cypress run --component"
+
+      - run:
+          name: Run app
+          command: "npm start"
+          background: true
+
+      - run:
+          name: Wait for app
+          command: sleep 10
+
+      - cypress/run-tests:
+          cypress-command: "npx cypress run"
+
+workflows:
+  the_great_depression:
+    when: ${<< pipeline.parameters.run_frontend_tests >>}
+    jobs:
+      - frontend_tests:
+          filters:
+            branches:
+              only:
+                - master2.0-dev
+          requires:
+            - changes_in_frontend
