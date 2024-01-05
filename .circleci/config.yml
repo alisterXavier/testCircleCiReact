@@ -94,7 +94,7 @@ jobs:
 workflows:
   the_great_gatsby:
     jobs:
-      - the-greatest-showman
+      - to-kill-a-mocking-bird/the-greatest-showman
       - continuation/continue:
           configuration_path: .circleci/continue_config.yml
           requires:
