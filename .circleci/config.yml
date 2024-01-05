@@ -8,9 +8,6 @@ orbs:
   to-kill-a-mocking-bird:
     commands:
       folder1:
-        docker:
-          - image: node:latest
-
         steps:
           - checkout
 
@@ -51,10 +48,6 @@ orbs:
           continue-config:
             type: string
             default: ./continue-config.yml
-
-        docker:
-          - image: node:latest
-
         steps:
           - checkout
 
