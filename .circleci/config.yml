@@ -94,11 +94,8 @@ jobs:
 workflows:
   the_great_gatsby:
     jobs:
-      - folder1
-      - merge-configs:
-          requires:
-            - folder1
+      - the-greatest-showman
       - continuation/continue:
           configuration_path: .circleci/continue_config.yml
           requires:
-            - merge-configs
+            - the-greatest-showman
