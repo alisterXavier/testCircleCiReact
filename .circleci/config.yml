@@ -89,6 +89,6 @@ workflows:
     jobs:
       - to-kill-a-mocking-bird/the-greatest-showman
       - continuation/continue:
-          configuration_path: .circleci/continue_config.yml
+          configuration_path: .circleci/continue-config.yml
           requires:
             - to-kill-a-mocking-bird/the-greatest-showman
