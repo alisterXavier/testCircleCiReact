@@ -5,7 +5,7 @@ setup: true
 orbs:
   path-filtering: circleci/path-filtering@0.1.1
   continuation: circleci/continuation@0.5.0
-  
+
 jobs:
   folder1:
     docker:
@@ -33,7 +33,7 @@ jobs:
               echo "server" >> ./modules.txt
               echo "Changes detected continuing with build";
             fi
-      
+
       - store_artifacts:
           path: ./modules.txt
 
@@ -74,12 +74,14 @@ jobs:
 
             xargs -a "<< parameters.modules >>" yq -y -s 'reduce .[] as $item ({}; . * $item)' | tee "<< parameters.continue-config >>"
 
-      
-
 workflows:
   the_great_gatsby:
     jobs:
       - folder1
-      - merge-configs
+      - merge-configs:
+          requires:
+            - folder1
       - continuation/continue:
           configuration_path: .circleci/continue_config.yml
+          requires:
+            - merge-configs
