@@ -5,7 +5,7 @@ setup: true
 orbs:
   path-filtering: circleci/path-filtering@0.1.1
 
-job:
+jobs:
   folder1:
     docker:
       - image: node:latest
