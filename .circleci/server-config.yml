@@ -4,7 +4,7 @@ orbs:
   cypress: cypress-io/cypress@3.2.1
 
 jobs:
-  frontend_tests:
+  server_tests:
     docker:
       - image: cimg/base:2024.01
     steps:
@@ -20,4 +20,4 @@ jobs:
 workflows:
   the_great_depression:
     jobs:
-      - frontend_tests:
+      - server_tests

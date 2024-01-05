@@ -20,4 +20,4 @@ jobs:
 workflows:
   the_great_depression:
     jobs:
-      - frontend_tests:
+      - frontend_tests
