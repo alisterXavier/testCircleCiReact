@@ -71,7 +71,7 @@ orbs:
           - store_artifacts:
               path: ./modules.txt
           - store_artifacts:
-              path: ./continue-config.yml
+              path: .circleci/continue-config.yml
 
     jobs:
       the-greatest-showman:
