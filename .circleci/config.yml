@@ -2,10 +2,11 @@ version: 2.1
 
 setup: true
 
-  
 orbs:
-  continuation: circleci/continuation@0.5.0
   to-kill-a-mocking-bird:
+    orbs:
+      continuation: circleci/continuation@0.5.0
+    
     commands:
       folder1:
         steps:
@@ -33,7 +34,7 @@ orbs:
 
           - store_artifacts:
               path: ./modules.txt
-      
+
       merge-configs:
         parameters:
           modules:
@@ -83,12 +84,10 @@ orbs:
               command: pip install yq
           - folder1
           - merge-configs
+          - continuation/continue:
+              configuration_path: .circleci/continue-config.yml
 
 workflows:
   the_great_gatsby:
     jobs:
       - to-kill-a-mocking-bird/the-greatest-showman
-      - continuation/continue:
-          configuration_path: .circleci/continue-config.yml
-          requires:
-            - to-kill-a-mocking-bird/the-greatest-showman
