@@ -1,0 +1,23 @@
+version: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@3.2.1
+
+jobs:
+  frontend_tests:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "7e:81:79:84:bc:03:cb:d8:b5:33:21:0d:46:1e:f3:22"
+      - run:
+          name: Push
+          command: echo "server"
+      
+
+workflows:
+  the_great_depression:
+    jobs:
+      - frontend_tests:

@@ -3,14 +3,6 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@3.2.1
 
-parameters:
-  run_frontend_tests:
-    type: boolean
-    default: false
-  run_backend_deploy:
-    type: boolean
-    default: false
-
 jobs:
   frontend_tests:
     docker:
@@ -22,15 +14,10 @@ jobs:
             - "7e:81:79:84:bc:03:cb:d8:b5:33:21:0d:46:1e:f3:22"
       - run:
           name: Push
-          command: git push origin master2.0-dev:master
+          command: echo "frontend"
       
 
 workflows:
   the_great_depression:
-    when: << pipeline.parameters.run_frontend_tests >>
     jobs:
       - frontend_tests:
-          filters:
-            branches:
-              only:
-                - master2.0-dev
