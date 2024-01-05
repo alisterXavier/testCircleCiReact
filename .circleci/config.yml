@@ -41,7 +41,7 @@ jobs:
     parameters:
       modules:
         type: string
-        default: modules.txt
+        default: ./modules.txt
       frontend-config-loc:
         type: string
         default: ./server-config.yml
@@ -73,6 +73,11 @@ jobs:
             sed -i -e 's/^/.circleci\//; s/$/-config.yml/g' "<< parameters.modules >>"
 
             xargs -a "<< parameters.modules >>" yq -y -s 'reduce .[] as $item ({}; . * $item)' | tee "<< parameters.continue-config >>"
+
+      - store_artifacts:
+          path: ./modules.txt
+      - store_artifacts:
+          path: ./continue-config.yml
 
 workflows:
   the_great_gatsby:
