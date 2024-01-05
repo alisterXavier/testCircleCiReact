@@ -48,7 +48,7 @@ orbs:
             default: ./server-config.yml
           continue-config:
             type: string
-            default: ./continue-config.yml
+            default: .circleci/continue-config.yml
         steps:
           - checkout
 
