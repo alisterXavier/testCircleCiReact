@@ -7,9 +7,9 @@ jobs:
   frontend_tests:
     docker:
       - image: node:latest
-    environment:
-      VERCEL_ORG_ID: 7lRrNrcttdetfbCTOec21hLj
-      VERCEL_PROJECT_ID: prj_1mIekTfF8NsN0xgLck1ITWQCU0GO
+        environment:
+          VERCEL_ORG_ID: $VERCEL_ORG_ID
+          VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
     steps:
       - checkout
       
