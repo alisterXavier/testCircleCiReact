@@ -8,19 +8,11 @@ jobs:
     docker:
       - image: node:latest
     environment:
-      VERCEL_ORG_ID: ${VERCEL_ORG_ID}
-      VERCEL_PROJECT_ID: ${VERCEL_PROJECT_ID}
+      VERCEL_ORG_ID: 7lRrNrcttdetfbCTOec21hLj
+      VERCEL_PROJECT_ID: prj_1mIekTfF8NsN0xgLck1ITWQCU0GO
     steps:
       - checkout
-
-      - run:
-          name: Echo
-          command: echo ${VERCEL_ORG_ID}
-
-      - run:
-          name: Echo
-          command: echo ${VERCEL_ORG_ID}
-
+      
       - run:
           name: Install Vercel CLI
           command: npm install --global vercel@latest
