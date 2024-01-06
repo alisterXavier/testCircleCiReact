@@ -6,7 +6,7 @@ orbs:
 jobs:
   frontend_tests:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:latest
     environment:
       VERCEL_ORG_ID: $ORG_ID
       VERCEL_PROJECT_ID: $PROJECT_ID
