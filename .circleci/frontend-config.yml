@@ -12,6 +12,10 @@ jobs:
       VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
     steps:
       - checkout
+
+      - run:
+          name: Echo
+          command: echo $VERCEL_ORG_ID
       - run:
           name: Install Vercel CLI
           command: npm install --global vercel@latest
