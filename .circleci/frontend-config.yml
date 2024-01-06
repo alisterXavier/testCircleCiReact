@@ -21,7 +21,7 @@ jobs:
           command: vercel pull --yes --environment=production --token=$TOKEN
       - run:
           name: Build Project Artifacts
-          command: vercel build --token=$TOKEN
+          command: vercel build --prod --token=$TOKEN
       - run:
           name: Deploy Project Artifacts to Vercel
           command: vercel deploy --prebuilt --prod --token=$TOKEN
