@@ -6,7 +6,8 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "cypress": "^13.6.2"
+    "cypress": "^13.6.2",
+    "web-vitals": "^3.5.1"
   },
   "devDependencies": {
     "react": "^18.2.0",

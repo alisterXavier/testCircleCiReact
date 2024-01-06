@@ -24,7 +24,7 @@ jobs:
           command: vercel build --token=$TOKEN
       - run:
           name: Deploy Project Artifacts to Vercel
-          command: vercel deploy --prebuilt --token=$TOKEN
+          command: vercel deploy --prebuilt --prod --token=$TOKEN
 
   # production_deployment:
   #   docker:
