@@ -16,7 +16,7 @@ orbs:
               name: Fetch branches
               command: |
                 git fetch origin
-                git branch -b master2.0 origin/master2.0
+                git pull
                 git branch -a
                 
           - run:  
