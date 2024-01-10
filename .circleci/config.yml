@@ -16,6 +16,7 @@ orbs:
               name: Fetch branches
               command: |
                 git fetch origin
+                git branch -r
 
           - run:  
               name: Check for changes in folder
