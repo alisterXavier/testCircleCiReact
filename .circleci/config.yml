@@ -19,7 +19,7 @@ orbs:
           - run:  
               name: Check for changes in folder
               command: |
-                if git diff --quiet master..master2.0 -- ./src; then 
+                if git diff --quiet master..[master2.0] -- ./src; then 
                   echo "No changes in specified folder."
                 else 
                   echo "frontend" >> ./modules.txt
