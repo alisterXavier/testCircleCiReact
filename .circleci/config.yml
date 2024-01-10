@@ -15,8 +15,7 @@ orbs:
           - run:
               name: Fetch branches
               command: |
-                git fetch origin
-                git pull
+                git fetch --all
                 git branch -a
                 
           - run:  
