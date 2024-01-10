@@ -25,28 +25,7 @@ jobs:
       - run:
           name: Deploy Project Artifacts to Vercel
           command: vercel deploy --prebuilt --prod --token=$TOKEN
-
-  # production_deployment:
-  #   docker:
-  #     - image: circleci/node:latest
-  #   environment:
-  #     VERCEL_ORG_ID: $ORG_ID
-  #     VERCEL_PROJECT_ID: $PROJECT_ID
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Install Vercel CLI
-  #         command: npm install --global vercel@latest
-  #     - run:
-  #         name: Pull Vercel Environment Information
-  #         command: vercel pull --yes --environment=production --token=$TOKEN
-  #     - run:
-  #         name: Build Project Artifacts
-  #         command: vercel build --prod --token=$TOKEN
-  #     - run:
-  #         name: Deploy Project Artifacts to Vercel
-  #         command: vercel deploy --prebuilt --prod --token=$TOKEN
-
+          
 workflows:
   the_great_depression_1:
     jobs:

@@ -15,7 +15,7 @@ orbs:
           - run:
               name: Check for changes in folder
               command: |
-                if git diff --quiet master2.0..master2.0-dev ./src; then 
+                if git diff --quiet master2.0..master2.0-dev -- ./src; then 
                   echo "No changes in specified folder."
                 else 
                   echo "frontend" >> ./modules.txt
@@ -25,7 +25,7 @@ orbs:
           - run:
               name: Check for changes in folder
               command: |
-                if git diff --quiet master2.0..master2.0-dev ./cypress; then 
+                if git diff --quiet master2.0..master2.0-dev -- ./cypress; then 
                   echo "No changes in specified folder."
                 else 
                   echo "server" >> ./modules.txt
