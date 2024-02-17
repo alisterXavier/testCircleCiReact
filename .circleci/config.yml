@@ -35,10 +35,9 @@ jobs:
       - cypress/run-tests:
           start-command: npm start
           cypress-command: "npx wait-on@latest http://localhost:3000 && npx cypress run"
-          working-directory: app
 
       - store_artifacts:
-          path: ./app/cypress/screenshots
+          path: /cypress/screenshots
           when: on_fail
 
 
