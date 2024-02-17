@@ -28,16 +28,6 @@ orbs:
                   echo "Changes detected continuing with build";
                 fi
 
-          - run:
-              name: Check for changes in folder
-              command: |
-                if git diff --quiet master2.0..master2.0-dev -- ./cypress; then 
-                  echo "No changes in specified folder."
-                else 
-                  echo "server" >> ./modules.txt
-                  echo "Changes detected continuing with build";
-                fi
-
           - store_artifacts:
               path: ./modules.txt
 
@@ -46,12 +36,6 @@ orbs:
           modules:
             type: string
             default: ./modules.txt
-          frontend-config-loc:
-            type: string
-            default: ./server-config.yml
-          server-config-loc:
-            type: string
-            default: ./server-config.yml
           continue-config:
             type: string
             default: .circleci/continue-config.yml
